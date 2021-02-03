@@ -13,10 +13,18 @@ import CoreLocation
 class MapVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var pullUoViewHighConstrains: NSLayoutConstraint!
+    @IBOutlet weak var pullUpView: UIView!
+    
     
     var locationManager = CLLocationManager()
     let authorizationStatus = CLLocationManager.authorizationStatus() //keep tracking our authorization status
     let regionRedius: Double = 1000 // region is 1000 meter large
+    
+    var screenSize = UIScreen.main.bounds
+    
+    var spinner: UIActivityIndicatorView?
+    var progressLbl: UILabel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +44,36 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         mapView.addGestureRecognizer(doubleTap)
     }
     
+    func addSwipe() {
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(animateViewDwon))
+        swipe.direction = .down
+        pullUpView.addGestureRecognizer(swipe)
+    }
     
+    func animateViewUp() {
+        // modife constraians to move up view
+        pullUoViewHighConstrains.constant = 300
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded() // update constraints and layout if needed is going to redraw what was changed
+        }
+    }
+    
+    @objc func animateViewDwon() {
+        pullUoViewHighConstrains.constant = 0
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func addSpinner() {
+        spinner = UIActivityIndicatorView()
+        spinner?.center = CGPoint(x: (screenSize.width / 2) - (spinner!.frame.width / 2), y: 150)
+        spinner?.style = .large
+        spinner?.color = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        spinner?.startAnimating()
+        pullUpView.addSubview(spinner!)
+        
+    }
 
     @IBAction func centerMapBtnWasPressed(_ sender: Any) {
         if authorizationStatus == .authorizedAlways || authorizationStatus == .authorizedWhenInUse{
@@ -66,6 +103,9 @@ extension MapVC: MKMapViewDelegate {
     
     @objc func dropPin(sender: UITapGestureRecognizer) {
         removePin()
+        animateViewUp()
+        addSwipe()
+        addSpinner()
         // drop the pin on the map
         //creat touch point
         let touchPoint = sender.location(in: mapView) // give cordinate of the screen

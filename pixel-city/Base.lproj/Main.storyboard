@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Double-tap to drop a pin and view photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkj-YO-6M2">
-                                        <rect key="frame" x="22.5" y="40" width="330" height="24"/>
+                                        <rect key="frame" x="22.5" y="33" width="330" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="1rD-rD-tT6"/>
                                             <constraint firstAttribute="width" constant="330" id="3Pq-YF-4bJ"/>
@@ -36,9 +36,17 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="dkj-YO-6M2" firstAttribute="centerX" secondItem="fjJ-P8-1sq" secondAttribute="centerX" id="FwR-XD-SnV"/>
-                                    <constraint firstItem="dkj-YO-6M2" firstAttribute="centerY" secondItem="fjJ-P8-1sq" secondAttribute="centerY" constant="7" id="UwH-vJ-jCF"/>
+                                    <constraint firstItem="dkj-YO-6M2" firstAttribute="centerY" secondItem="fjJ-P8-1sq" secondAttribute="centerY" id="08S-Jy-Jmd"/>
+                                    <constraint firstItem="dkj-YO-6M2" firstAttribute="centerX" secondItem="fjJ-P8-1sq" secondAttribute="centerX" id="JE9-2i-6Yy"/>
                                     <constraint firstAttribute="height" constant="90" id="fiz-1a-TX0"/>
+                                    <constraint firstItem="dkj-YO-6M2" firstAttribute="centerY" secondItem="fjJ-P8-1sq" secondAttribute="centerY" id="pR9-HX-tTs"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TYi-L0-hug">
+                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="YPq-o8-ioa"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTC-7w-yto">
@@ -52,30 +60,29 @@
                                     <action selector="centerMapBtnWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mto-Kh-uU2"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TYi-L0-hug">
-                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="5Fi-EJ-Wal" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="126-bz-420"/>
-                            <constraint firstItem="TYi-L0-hug" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="6Xe-MU-op0"/>
-                            <constraint firstItem="TYi-L0-hug" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="9fN-Cx-1Dz"/>
-                            <constraint firstItem="fjJ-P8-1sq" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="OBf-s8-DBs"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PTC-7w-yto" secondAttribute="trailing" constant="20" id="Odm-VQ-vFf"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PTC-7w-yto" secondAttribute="bottom" constant="20" id="Ou5-ah-44k"/>
-                            <constraint firstItem="fjJ-P8-1sq" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="X8I-Sh-UoY"/>
-                            <constraint firstAttribute="trailing" secondItem="TYi-L0-hug" secondAttribute="trailing" id="bAM-2e-9kH"/>
-                            <constraint firstItem="fjJ-P8-1sq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="duc-cb-Vq3"/>
-                            <constraint firstItem="5Fi-EJ-Wal" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="il0-vr-gjL"/>
-                            <constraint firstItem="5Fi-EJ-Wal" firstAttribute="trailing" secondItem="fjJ-P8-1sq" secondAttribute="trailing" id="kSx-cp-ify"/>
-                            <constraint firstAttribute="bottom" secondItem="5Fi-EJ-Wal" secondAttribute="bottom" id="vgz-Id-5JW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PTC-7w-yto" secondAttribute="trailing" constant="20" id="4ud-Ji-1Z2"/>
+                            <constraint firstItem="5Fi-EJ-Wal" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7ie-fr-3xn"/>
+                            <constraint firstItem="fjJ-P8-1sq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8m2-vR-AzQ"/>
+                            <constraint firstItem="TYi-L0-hug" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="90I-88-BBj"/>
+                            <constraint firstItem="fjJ-P8-1sq" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="D2e-S3-RCJ"/>
+                            <constraint firstItem="TYi-L0-hug" firstAttribute="top" secondItem="5Fi-EJ-Wal" secondAttribute="bottom" id="Ek5-eA-GLb"/>
+                            <constraint firstItem="TYi-L0-hug" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FNk-19-8GJ"/>
+                            <constraint firstItem="TYi-L0-hug" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="RYc-Ul-bzM"/>
+                            <constraint firstItem="5Fi-EJ-Wal" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="abE-9j-AlC"/>
+                            <constraint firstItem="TYi-L0-hug" firstAttribute="top" secondItem="PTC-7w-yto" secondAttribute="bottom" constant="20" id="d8s-RF-eTM"/>
+                            <constraint firstItem="fjJ-P8-1sq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="dQI-DR-FNx"/>
+                            <constraint firstItem="5Fi-EJ-Wal" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fXZ-DQ-4Gs"/>
+                            <constraint firstItem="fjJ-P8-1sq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="j4Q-2u-zJy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="5Fi-EJ-Wal" id="MAO-FW-NiW"/>
+                        <outlet property="pullUoViewHighConstrains" destination="YPq-o8-ioa" id="6ow-we-Ko4"/>
+                        <outlet property="pullUpView" destination="TYi-L0-hug" id="eOP-bG-pLY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
