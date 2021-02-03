@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Alamofire
+import AlamofireImage
 
 class MapVC: UIViewController, UIGestureRecognizerDelegate {
     
@@ -28,6 +30,8 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     
     var flowLayout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView?
+    
+    var imageUrlArray = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,17 +157,34 @@ extension MapVC: MKMapViewDelegate {
         let annotation = DroppablePin(coordinate: touchCoordinate, indentifire: "droppablePin")
         mapView.addAnnotation(annotation) // will show on the map view
         
-        print(flickrUrl(forApiKey: apiKey, withAnnotation: annotation, andNumberOfPhotos: 40))
-        
         //center pin
         let coordinateRegion = MKCoordinateRegion.init(center: touchCoordinate, latitudinalMeters: regionRedius * 2.0, longitudinalMeters: regionRedius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
+        
+        retriveUrls(forAnnotation: annotation) { (true) in
+            print(self.imageUrlArray)
+        }
         
     }
     
     func removePin() {
         for annotaion in mapView.annotations {
             mapView.removeAnnotation(annotaion)
+        }
+    }
+    
+    func retriveUrls(forAnnotation annotaion: DroppablePin, handler: @escaping (_ status: Bool) -> ()) {
+        imageUrlArray = [] // clear array with urls
+        
+        AF.request(flickrUrl(forApiKey: apiKey, withAnnotation: annotaion, andNumberOfPhotos: 40)).responseJSON { (response) in
+            guard let json = response.value as? Dictionary<String, AnyObject> else { return }// this type is response of json (response return this kind of dictionary)
+            let photosDict = json["photos"] as! Dictionary<String, AnyObject> // dictionry photos has this type of dictionry inside
+            let photosDictArray = photosDict["photo"] as! [Dictionary<String, AnyObject>]
+            for photo in photosDictArray { // create url from json which include photos
+                let postUrl = "https://live.staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!).jpg" // defoult image size from flickr is 500px
+                self.imageUrlArray.append(postUrl)
+            }
+            handler(true)
         }
     }
 }
