@@ -10,6 +10,7 @@
 		305DBB8DCEA136B5634BF35E /* Pods_pixel_city.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635F4EE117DE282B2991DE02 /* Pods_pixel_city.framework */; };
 		DB6ADF3A25CAA190007243C5 /* DroppablePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6ADF3925CAA190007243C5 /* DroppablePin.swift */; };
 		DB6ADF3C25CAC3B1007243C5 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6ADF3B25CAC3B1007243C5 /* PhotoCell.swift */; };
+		DB6ADF3E25CB3382007243C5 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6ADF3D25CB3382007243C5 /* Constans.swift */; };
 		DBCEEAF725C99D5400824A5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCEEAF625C99D5400824A5D /* AppDelegate.swift */; };
 		DBCEEAF925C99D5400824A5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCEEAF825C99D5400824A5D /* SceneDelegate.swift */; };
 		DBCEEAFB25C99D5400824A5D /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCEEAFA25C99D5400824A5D /* MapVC.swift */; };
@@ -23,6 +24,7 @@
 		635F4EE117DE282B2991DE02 /* Pods_pixel_city.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pixel_city.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB6ADF3925CAA190007243C5 /* DroppablePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppablePin.swift; sourceTree = "<group>"; };
 		DB6ADF3B25CAC3B1007243C5 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		DB6ADF3D25CB3382007243C5 /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
 		DBCEEAF325C99D5400824A5D /* pixel-city.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pixel-city.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCEEAF625C99D5400824A5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBCEEAF825C99D5400824A5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		DBCEEB0D25C99DBB00824A5D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				DB6ADF3D25CB3382007243C5 /* Constans.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			files = (
 				DBCEEAFB25C99D5400824A5D /* MapVC.swift in Sources */,
 				DB6ADF3C25CAC3B1007243C5 /* PhotoCell.swift in Sources */,
+				DB6ADF3E25CB3382007243C5 /* Constans.swift in Sources */,
 				DB6ADF3A25CAA190007243C5 /* DroppablePin.swift in Sources */,
 				DBCEEAF725C99D5400824A5D /* AppDelegate.swift in Sources */,
 				DBCEEAF925C99D5400824A5D /* SceneDelegate.swift in Sources */,

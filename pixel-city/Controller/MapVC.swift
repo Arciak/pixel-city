@@ -143,6 +143,7 @@ extension MapVC: MKMapViewDelegate {
         addSwipe()
         addSpinner()
         addProgressLbl()
+        
         // drop the pin on the map
         //creat touch point
         let touchPoint = sender.location(in: mapView) // give cordinate of the screen
@@ -151,6 +152,8 @@ extension MapVC: MKMapViewDelegate {
         
         let annotation = DroppablePin(coordinate: touchCoordinate, indentifire: "droppablePin")
         mapView.addAnnotation(annotation) // will show on the map view
+        
+        print(flickrUrl(forApiKey: apiKey, withAnnotation: annotation, andNumberOfPhotos: 40))
         
         //center pin
         let coordinateRegion = MKCoordinateRegion.init(center: touchCoordinate, latitudinalMeters: regionRedius * 2.0, longitudinalMeters: regionRedius * 2.0)
