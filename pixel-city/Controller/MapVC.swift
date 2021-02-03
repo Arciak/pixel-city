@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapVC: UIViewController {
+class MapVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -26,7 +26,17 @@ class MapVC: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         configureLocetionServices()
+        addDoubleTap()
     }
+    
+    func addDoubleTap() {
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(dropPin(sender:)))
+        doubleTap.numberOfTapsRequired = 2
+        doubleTap.delegate = self
+        mapView.addGestureRecognizer(doubleTap)
+    }
+    
+    
 
     @IBAction func centerMapBtnWasPressed(_ sender: Any) {
         if authorizationStatus == .authorizedAlways || authorizationStatus == .authorizedWhenInUse{
@@ -41,6 +51,29 @@ extension MapVC: MKMapViewDelegate {
         guard let coordinate = locationManager.location?.coordinate else { return }
         let coordinateRegion = MKCoordinateRegion.init(center: coordinate, latitudinalMeters: regionRedius * 2.0, longitudinalMeters: regionRedius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    @objc func dropPin(sender: UITapGestureRecognizer) {
+        removePin()
+        // drop the pin on the map
+        //creat touch point
+        let touchPoint = sender.location(in: mapView) // give cordinate of the screen
+        // convert to gps coordinate
+        let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+        
+        let annotation = DroppablePin(coordinate: touchCoordinate, indentifire: "droppablePin")
+        mapView.addAnnotation(annotation) // will show on the map view
+        
+        //center pin
+        let coordinateRegion = MKCoordinateRegion.init(center: touchCoordinate, latitudinalMeters: regionRedius * 2.0, longitudinalMeters: regionRedius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
+        
+    }
+    
+    func removePin() {
+        for annotaion in mapView.annotations {
+            mapView.removeAnnotation(annotaion)
+        }
     }
 }
 
