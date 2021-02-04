@@ -48,7 +48,7 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         collectionView?.register(PhotoCell.self, forCellWithReuseIdentifier: "photoCell") //PhotCell.self let us use as a class object
         collectionView?.delegate = self
         collectionView?.dataSource = self
-        collectionView?.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        collectionView?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         pullUpView.addSubview(collectionView!)
     }
@@ -146,6 +146,10 @@ extension MapVC: MKMapViewDelegate {
         removeProgressLbl()
         cancelAllSession() // remove old session
         
+        imageUrlArray = []
+        imageArray = []
+        collectionView?.reloadData() // we dont want see previous pictures
+        
         animateViewUp()
         addSwipe()
         addSpinner()
@@ -170,7 +174,7 @@ extension MapVC: MKMapViewDelegate {
                     if finish {
                         self.removeSpinner()
                         self.removeProgressLbl()
-                        
+                        self.collectionView?.reloadData()
                     }
                 }
             }
@@ -185,7 +189,6 @@ extension MapVC: MKMapViewDelegate {
     }
     
     func retriveUrls(forAnnotation annotaion: DroppablePin, handler: @escaping (_ status: Bool) -> ()) {
-        imageUrlArray = [] // clear array with urls
         
         AF.request(flickrUrl(forApiKey: apiKey, withAnnotation: annotaion, andNumberOfPhotos: 40)).responseJSON { (response) in
             guard let json = response.value as? Dictionary<String, AnyObject> else { return }// this type is response of json (response return this kind of dictionary)
@@ -200,7 +203,6 @@ extension MapVC: MKMapViewDelegate {
     }
     
     func retrieveImages(handler: @escaping (_ status: Bool) -> ()) {
-        imageArray = []
         
         // creat AF request to download images
         for url in imageUrlArray {
@@ -252,12 +254,15 @@ extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // number of items in array
-        return 4
+        return imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as? PhotoCell
-        return cell!
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as? PhotoCell else { return UICollectionViewCell() }
+        let imagefromIndex = imageArray[indexPath.row]
+        let imageView = UIImageView(image: imagefromIndex)
+        cell.addSubview(imageView)
+        return cell
     }
     
     
