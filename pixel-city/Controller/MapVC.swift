@@ -19,6 +19,7 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var pullUpView: UIView!
     
     
+    
     var locationManager = CLLocationManager()
     let authorizationStatus = CLLocationManager.authorizationStatus() //keep tracking our authorization status
     let regionRedius: Double = 1000 // region is 1000 meter large
@@ -33,6 +34,7 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     
     var imageUrlArray = [String]()
     var imageArray = [UIImage]()
+    var titleArray = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,6 +150,7 @@ extension MapVC: MKMapViewDelegate {
         
         imageUrlArray = []
         imageArray = []
+        titleArray = []
         collectionView?.reloadData() // we dont want see previous pictures
         
         animateViewUp()
@@ -191,12 +194,14 @@ extension MapVC: MKMapViewDelegate {
     func retriveUrls(forAnnotation annotaion: DroppablePin, handler: @escaping (_ status: Bool) -> ()) {
         
         AF.request(flickrUrl(forApiKey: apiKey, withAnnotation: annotaion, andNumberOfPhotos: 40)).responseJSON { (response) in
+            //print("Print rasponse value: \(response.value)")
             guard let json = response.value as? Dictionary<String, AnyObject> else { return }// this type is response of json (response return this kind of dictionary)
             let photosDict = json["photos"] as! Dictionary<String, AnyObject> // dictionry photos has this type of dictionry inside
             let photosDictArray = photosDict["photo"] as! [Dictionary<String, AnyObject>]
             for photo in photosDictArray { // create url from json which include photos
                 let postUrl = "https://live.staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!).jpg" // defoult image size from flickr is 500px
                 self.imageUrlArray.append(postUrl)
+                self.titleArray.append("\(photo["title"]!)")
             }
             handler(true)
         }
@@ -268,7 +273,7 @@ extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
     // get specific cell, item
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let popVC = storyboard?.instantiateViewController(identifier: "PopVC") as? PopVC else { return }
-        popVC.initData(forImage: imageArray[indexPath.row])
+        popVC.initData(forImage: imageArray[indexPath.row], photoTitle: titleArray[indexPath.row])
         present(popVC, animated: true, completion: nil)
     }
     
@@ -280,7 +285,7 @@ extension MapVC: UIViewControllerPreviewingDelegate {
         guard let indexPath = collectionView?.indexPathForItem(at: location), let cell = collectionView?.cellForItem(at: indexPath) else { return nil }
         
         guard let popVC = storyboard?.instantiateViewController(withIdentifier: "PopVC") as? PopVC else { return nil }
-        popVC.initData(forImage: imageArray[indexPath.row])
+        popVC.initData(forImage: imageArray[indexPath.row], photoTitle: "try")
         
         previewingContext.sourceRect = cell.contentView.frame
         return popVC
