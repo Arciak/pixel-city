@@ -35,6 +35,7 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     var imageUrlArray = [String]()
     var imageArray = [UIImage]()
     var titleArray = [String]()
+    var photoCoordinate: CLLocationCoordinate2D?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,6 +170,8 @@ extension MapVC: MKMapViewDelegate {
         
         //center pin
         let coordinateRegion = MKCoordinateRegion.init(center: touchCoordinate, latitudinalMeters: regionRedius * 2.0, longitudinalMeters: regionRedius * 2.0)
+        
+        self.photoCoordinate = touchCoordinate
         mapView.setRegion(coordinateRegion, animated: true)
         
         retriveUrls(forAnnotation: annotation) { (success) in
@@ -273,7 +276,7 @@ extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
     // get specific cell, item
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let popVC = storyboard?.instantiateViewController(identifier: "PopVC") as? PopVC else { return }
-        popVC.initData(forImage: imageArray[indexPath.row], photoTitle: titleArray[indexPath.row])
+        popVC.initData(forImage: imageArray[indexPath.row], photoTitle: titleArray[indexPath.row], photoCoordination: self.photoCoordinate!)
         present(popVC, animated: true, completion: nil)
     }
     
@@ -285,7 +288,7 @@ extension MapVC: UIViewControllerPreviewingDelegate {
         guard let indexPath = collectionView?.indexPathForItem(at: location), let cell = collectionView?.cellForItem(at: indexPath) else { return nil }
         
         guard let popVC = storyboard?.instantiateViewController(withIdentifier: "PopVC") as? PopVC else { return nil }
-        popVC.initData(forImage: imageArray[indexPath.row], photoTitle: "try")
+        popVC.initData(forImage: imageArray[indexPath.row], photoTitle: "try", photoCoordination: self.photoCoordinate!)
         
         previewingContext.sourceRect = cell.contentView.frame
         return popVC

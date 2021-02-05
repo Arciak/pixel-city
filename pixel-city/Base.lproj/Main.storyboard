@@ -123,11 +123,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" pitchEnabled="NO" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OnS-eR-ZvQ">
+                                <rect key="frame" x="20" y="66" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="5KX-tV-WZ0"/>
+                                    <constraint firstAttribute="width" constant="120" id="OOd-Cj-tmP"/>
+                                </constraints>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="VeD-F8-0wh" firstAttribute="top" secondItem="m4u-h7-NSs" secondAttribute="top" id="15O-7Z-iZJ"/>
                             <constraint firstItem="tEq-fv-qah" firstAttribute="leading" secondItem="m4u-h7-NSs" secondAttribute="leading" constant="20" id="4B9-lz-DfJ"/>
+                            <constraint firstItem="OnS-eR-ZvQ" firstAttribute="leading" secondItem="m4u-h7-NSs" secondAttribute="leading" constant="20" id="575-bq-HUR"/>
                             <constraint firstItem="m4u-h7-NSs" firstAttribute="trailing" secondItem="tEq-fv-qah" secondAttribute="trailing" constant="20" id="8Au-Sb-dnc"/>
                             <constraint firstItem="VeD-F8-0wh" firstAttribute="trailing" secondItem="m4u-h7-NSs" secondAttribute="trailing" id="Abc-z5-Vy4"/>
                             <constraint firstItem="VeD-F8-0wh" firstAttribute="leading" secondItem="m4u-h7-NSs" secondAttribute="leading" id="ECI-is-auF"/>
@@ -135,10 +143,12 @@
                             <constraint firstItem="6Oz-97-LoH" firstAttribute="centerX" secondItem="NqJ-yZ-Su2" secondAttribute="centerX" id="Qs2-eR-xfp"/>
                             <constraint firstItem="tEq-fv-qah" firstAttribute="top" secondItem="m4u-h7-NSs" secondAttribute="top" constant="20" id="b4D-18-beA"/>
                             <constraint firstItem="VeD-F8-0wh" firstAttribute="bottom" secondItem="m4u-h7-NSs" secondAttribute="bottom" id="jKY-fo-VdL"/>
+                            <constraint firstItem="OnS-eR-ZvQ" firstAttribute="top" secondItem="tEq-fv-qah" secondAttribute="bottom" constant="20" id="unY-da-6Ts"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m4u-h7-NSs"/>
                     </view>
                     <connections>
+                        <outlet property="mapViewSmall" destination="OnS-eR-ZvQ" id="nhl-HK-OUj"/>
                         <outlet property="popImageView" destination="VeD-F8-0wh" id="rFn-m6-nIf"/>
                         <outlet property="titleLbl" destination="tEq-fv-qah" id="PP1-kM-I0z"/>
                     </connections>
